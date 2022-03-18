@@ -1,0 +1,37 @@
+
+BEGIN
+
+  DBMS_NETWORK_ACL_ADMIN.assign_acl (acl     => 'apex.xml',host    => '*',lower_port => 80,upper_port => 80);
+
+  COMMIT;
+
+END;
+
+--script2
+
+BEGIN
+
+DBMS_NETWORK_ACL_ADMIN.ASSIGN_ACL (acl => 'apex.xml',host => 'smtp.mailgun.org');
+
+COMMIT;
+
+END;
+
+
+
+--script_3
+
+BEGIN
+
+DBMS_NETWORK_ACL_ADMIN.append_host_ace (
+host => 'mail.XXXXXXXXX.com',
+lower_port => 587,
+upper_port => 587,
+ace => xs$ace_type(privilege_list => xs$name_list('http'),
+principal_name => ‘XXXXXXX',
+principal_type => xs_acl.ptype_db));
+
+END;
+
+/
+
